@@ -19,7 +19,7 @@ n8n community node for the [kwtSMS](https://www.kwtsms.com) SMS gateway. Send SM
 - **Phone Normalization**: Automatically strips prefixes, converts Arabic digits, removes duplicates
 - **Message Cleaning**: Strips emoji, hidden characters, and HTML tags before sending
 - **Pre-send Safety**: Checks balance and coverage before hitting the API
-- **Test Mode**: Send with test=1 to validate integration without consuming credits
+- **Test Mode**: Send with test=1 to validate integration. Test messages are queued but not delivered. Their credits are held until you delete them from the Sending Queue in your kwtsms.com account.
 
 ## Installation
 
@@ -64,7 +64,7 @@ You need a kwtSMS API account:
 - **To**: Phone number(s), comma-separated. International format, digits only (e.g., `96598765432`).
 - **Message**: SMS text. English: 160 chars/page. Arabic: 70 chars/page. Max 7 pages.
 - **Sender ID**: Must be pre-approved on your kwtSMS account.
-- **Test Mode** (optional): Send without delivering or consuming credits.
+- **Test Mode** (optional): Messages are queued but not delivered. Credits are held until you delete them from the Sending Queue.
 
 ### Account
 
@@ -103,7 +103,7 @@ The node maps all 33 kwtSMS error codes to user-friendly messages. Common errors
 | ERR006 | No valid phone numbers provided. |
 | ERR010 | Account balance is zero. |
 | ERR013 | Send queue is full. The node retries automatically with backoff. |
-| ERR028 | Must wait 15 seconds before sending to the same number again. |
+| ERR028 | Sent to the same number too soon. Duplicate SMS protection is opt-in per account (API settings); when on, the whole request is rejected and nothing is charged if any number was sent the same message within the account's window (10 seconds by default). |
 
 ## Compatibility
 

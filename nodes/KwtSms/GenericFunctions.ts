@@ -37,7 +37,8 @@ export function getErrorMessage(code: string): string {
 		ERR025: 'Invalid number format. Use digits only, no + or 00 prefix.',
 		ERR026: 'No route for this country. Contact kwtSMS to activate.',
 		ERR027: 'HTML tags are not allowed in messages',
-		ERR028: 'Must wait 15 seconds before sending to the same number again',
+		// 2026-10-22 15:34 +03: ERR028 text corrected. Duplicate SMS protection is opt-in per account with a per-account window, never a fixed 15 s.
+		ERR028: 'Sent to the same number too soon.',
 		ERR029: 'Message does not exist or invalid message ID',
 		ERR030: 'Message stuck in queue with error. Delete from queue to recover credits.',
 		ERR031: 'Message rejected: prohibited content detected',

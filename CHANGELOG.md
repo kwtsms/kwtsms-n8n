@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Docs
+
+- Test mode: test messages are queued but not delivered; their credits are held until you delete them from the Sending Queue (previously described as consuming no credits)
+- ERR028: now "Sent to the same number too soon." Duplicate SMS protection is opt-in per account with a configurable window (10 seconds by default), not a fixed 15 seconds
+
 ## [0.2.0] - 2026-04-19
 
 ### Changed

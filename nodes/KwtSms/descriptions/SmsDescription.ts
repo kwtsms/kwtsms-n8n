@@ -87,8 +87,9 @@ export const smsFields: INodeProperties[] = [
 		name: 'testMode',
 		type: 'boolean',
 		default: true,
+		// 2026-10-22 15:34 +03: test mode holds credits until the queued test is deleted; the old "No credits consumed" was wrong.
 		description:
-			'Send in test mode. Message enters queue but is not delivered. No credits consumed. Disable for production sends.',
+			'Send in test mode. Messages are queued but not delivered. Credits are held until you delete them from the Sending Queue. Disable for production sends.',
 		displayOptions: {
 			show: {
 				resource: ['sms'],

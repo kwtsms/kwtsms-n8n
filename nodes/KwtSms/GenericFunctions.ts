@@ -6,6 +6,14 @@ import {
 	NodeApiError,
 	IDataObject,
 } from 'n8n-workflow';
+// 2026-11-05 14:51 +03: version for the User-Agent comes from package.json, never a second copy, #939.
+import { version } from '../../package.json';
+
+/**
+ * User-Agent sent on every kwtSMS API call: integration name and version only, no personal data.
+ * 2026-11-05 14:51 +03: lets kwtSMS count accounts per integration, #939.
+ */
+export const USER_AGENT = `kwtsms-n8n/${version}`;
 
 /**
  * Returns a human-readable error message for a kwtSMS API error code.
@@ -76,6 +84,8 @@ export async function kwtSmsApiRequest(
 			headers: {
 				'Content-Type': 'application/json',
 				'Accept': 'application/json',
+				// 2026-11-05 14:51 +03: identify the integration to kwtSMS, #939.
+				'User-Agent': USER_AGENT,
 			},
 			body,
 			returnFullResponse: false,

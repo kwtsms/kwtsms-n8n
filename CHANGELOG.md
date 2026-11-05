@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Requests to kwtSMS carry the integration name and version (no personal data) so kwtSMS can see which integrations are in use.
+
 ### Changed
 
 - To and Phone Numbers field placeholders and README examples show 965XXXXXXXX instead of a sample mobile number

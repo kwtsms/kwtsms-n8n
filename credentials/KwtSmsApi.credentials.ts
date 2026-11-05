@@ -12,6 +12,8 @@ import type {
 	ICredentialType,
 	INodeProperties,
 } from 'n8n-workflow';
+// 2026-11-05 14:51 +03: version for the User-Agent of the credential test, from package.json, #939.
+import { version } from '../package.json';
 
 export class KwtSmsApi implements ICredentialType {
 	name = 'kwtSmsApi';
@@ -70,6 +72,8 @@ export class KwtSmsApi implements ICredentialType {
 			headers: {
 				'Content-Type': 'application/json',
 				'Accept': 'application/json',
+				// 2026-11-05 14:51 +03: identify the integration to kwtSMS on the credential test too, #939.
+				'User-Agent': `kwtsms-n8n/${version}`,
 			},
 		},
 	};

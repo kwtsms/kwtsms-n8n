@@ -61,7 +61,7 @@ You need a kwtSMS API account:
 | **Send** | Send an SMS to one or more recipients. Supports bulk sending with auto-batching, phone normalization, message cleaning, balance/coverage pre-checks, and duplicate removal. |
 
 **Parameters:**
-- **To**: Phone number(s), comma-separated. International format, digits only (e.g., `96598765432`).
+- **To**: Phone number(s), comma-separated. International format, digits only (e.g., `965XXXXXXXX`).
 - **Message**: SMS text. English: 160 chars/page. Arabic: 70 chars/page. Max 7 pages.
 - **Sender ID**: Must be pre-approved on your kwtSMS account.
 - **Test Mode** (optional): Messages are queued but not delivered. Credits are held until you delete them from the Sending Queue.
@@ -88,9 +88,9 @@ You need a kwtSMS API account:
 ## Phone Number Format
 
 Numbers are automatically normalized before any API call:
-- `+96598765432` becomes `96598765432` (strip +)
-- `0096598765432` becomes `96598765432` (strip 00)
-- `965 9876 5432` becomes `96598765432` (strip spaces)
+- `+965XXXXXXXX` becomes `965XXXXXXXX` (strip +)
+- `00965XXXXXXXX` becomes `965XXXXXXXX` (strip 00)
+- `+965 XXXX XXXX` becomes `965XXXXXXXX` (strip + and spaces)
 - Arabic/Hindi digits are converted to Latin automatically
 
 ## Error Handling

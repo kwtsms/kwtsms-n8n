@@ -204,7 +204,9 @@ export function deduplicateNumbers(numbers: string[]): string[] {
  * Masks a phone number for display in logs or UI, hiding the middle digits.
  *
  * Examples:
- * - "96598765432" becomes "965****32"
+ * - "99912345678" becomes "999****78"
+ *   (2026-11-05 11:33 +03: example uses 99912345678, country code 999 is unassigned, instead
+ *   of a sample Kuwait mobile that belongs to a real person, int-testnumber)
  * - "12345" becomes "***"
  *
  * @param phone - The phone number string to mask.

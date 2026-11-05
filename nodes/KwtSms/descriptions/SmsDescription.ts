@@ -39,7 +39,8 @@ export const smsFields: INodeProperties[] = [
 		type: 'string',
 		required: true,
 		default: '',
-		placeholder: '96598765432',
+		// 2026-11-05 11:33 +03: placeholder 965XXXXXXXX instead of a sample mobile number (sample numbers belong to real people), int-testnumber.
+		placeholder: '965XXXXXXXX',
 		description:
 			'Recipient phone number(s). Comma-separated for multiple. International format, digits only.',
 		displayOptions: {

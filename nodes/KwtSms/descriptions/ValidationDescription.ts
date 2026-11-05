@@ -39,7 +39,8 @@ export const validationFields: INodeProperties[] = [
 		type: 'string',
 		required: true,
 		default: '',
-		placeholder: '96598765432,96512345678',
+		// 2026-11-05 11:33 +03: placeholder 965XXXXXXXX instead of sample mobile numbers (they belong to real people), int-testnumber.
+		placeholder: '965XXXXXXXX,965XXXXXXXX',
 		description:
 			'Phone numbers to validate. Comma-separated. Numbers are normalized automatically.',
 		displayOptions: {

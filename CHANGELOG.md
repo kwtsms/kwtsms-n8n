@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - To and Phone Numbers field placeholders and README examples show 965XXXXXXXX instead of a sample mobile number
+- peerDependencies: n8n-workflow is now "*" so the node runs with whichever n8n-workflow the host n8n ships (n8n verification review).
 
 ### Docs
 

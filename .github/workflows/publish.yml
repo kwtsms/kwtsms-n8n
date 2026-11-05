@@ -14,12 +14,12 @@ jobs:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
         with:
-          node-version: '20.x'
+          node-version: '22.x'
           registry-url: 'https://registry.npmjs.org'
           cache: npm
+      # 2026-11-06 02:55 +03: npm trusted publishing (OIDC): no NPM_TOKEN (npm write tokens expire after 90 days); needs Node >= 22.14 and npm >= 11.5.1. int-npm-oidc
+      - run: npm install -g npm@^11.5.1
       - run: npm ci --ignore-scripts
       - run: npm run lint
       - run: npm run build
       - run: npm publish --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

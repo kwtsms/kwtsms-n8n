@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.2] - 2026-11-06
+
 ### Changed
 
 - Errors from the kwtSMS API are raised as n8n node errors (NodeApiError / NodeOperationError), so n8n shows them with the node and item that failed (n8n verification scanner).

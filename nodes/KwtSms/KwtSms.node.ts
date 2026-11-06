@@ -21,9 +21,10 @@ import type {
 	INodeType,
 	INodeTypeDescription,
 	IDataObject,
+	JsonObject,
 } from 'n8n-workflow';
 
-import { NodeConnectionTypes, NodeOperationError, sleep } from 'n8n-workflow';
+import { NodeApiError, NodeConnectionTypes, NodeOperationError, sleep } from 'n8n-workflow';
 
 import {
 	kwtSmsApiRequest,
@@ -182,7 +183,8 @@ export class KwtSms implements INodeType {
 						const isNoCoverage =
 							error.message?.includes('ERR033') || error.description?.includes('ERR033');
 						if (!isNoCoverage) {
-							throw err;
+							// 2026-11-06 03:19 +03: n8n scanner rule require-node-api-error: wrap instead of re-throwing raw errors (n8n verification), n8n-verify
+							throw new NodeApiError(this.getNode(), err as JsonObject);
 						}
 						this.logger.warn(
 							'kwtSMS: No active coverage (ERR033), sending without coverage filter.',
@@ -339,7 +341,11 @@ export class KwtSms implements INodeType {
 					});
 					continue;
 				}
-				throw error;
+				// 2026-11-06 03:19 +03: n8n scanner rule require-node-api-error: wrap instead of re-throwing raw errors (n8n verification), n8n-verify
+				if (error instanceof NodeOperationError) {
+					throw new NodeOperationError(this.getNode(), error, { itemIndex: i });
+				}
+				throw new NodeApiError(this.getNode(), error as JsonObject, { itemIndex: i });
 			}
 		}
 

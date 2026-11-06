@@ -25,7 +25,8 @@ export const senderOperations: INodeProperties[] = [
 				name: 'List',
 				value: 'list',
 				description: 'List all available sender IDs on the account',
-				action: 'List sender IDs',
+				// 2026-11-06 03:19 +03: sentence-case action text (n8n scanner rule), n8n-verify
+				action: 'List senders',
 			},
 		],
 		default: 'list',

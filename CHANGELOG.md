@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Errors from the kwtSMS API are raised as n8n node errors (NodeApiError / NodeOperationError), so n8n shows them with the node and item that failed (n8n verification scanner).
+- Sender operation action renamed to "List senders"; the Test Mode option now reads "Whether to send in test mode" (n8n naming rules).
+
 ## [0.2.1] - 2026-11-06
 
 ### Added

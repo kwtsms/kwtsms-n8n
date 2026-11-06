@@ -76,10 +76,12 @@ export const smsFields: INodeProperties[] = [
 		placeholder: 'KWT-SMS',
 		description:
 			'Sender ID for the message. Must be pre-approved on your kwtSMS account. Leave empty to use the default from credentials.',
+		// 2026-11-06 15:04 +03: node version 1 only; version 2 has it under Options (n8n manual review: optional fields in a collection).
 		displayOptions: {
 			show: {
 				resource: ['sms'],
 				operation: ['send'],
+				'@version': [1],
 			},
 		},
 	},
@@ -92,11 +94,48 @@ export const smsFields: INodeProperties[] = [
 		description:
 			// 2026-11-06 03:19 +03: boolean descriptions start with 'Whether' (n8n scanner rule), n8n-verify
 			'Whether to send in test mode. Messages are queued but not delivered. Credits are held until you delete them from the Sending Queue. Disable for production sends.',
+		// 2026-11-06 15:04 +03: node version 1 only (see Sender ID above).
 		displayOptions: {
 			show: {
 				resource: ['sms'],
 				operation: ['send'],
+				'@version': [1],
 			},
 		},
+	},
+	// 2026-11-06 15:04 +03: node version 2: the optional Send fields in one Options collection (n8n manual review, task #980).
+	// Defaults are unchanged when an option is not added: sender from the credentials, test mode ON.
+	{
+		displayName: 'Options',
+		name: 'options',
+		type: 'collection',
+		placeholder: 'Add Option',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: ['sms'],
+				operation: ['send'],
+				'@version': [2],
+			},
+		},
+		options: [
+			{
+				displayName: 'Sender ID',
+				name: 'senderId',
+				type: 'string',
+				default: '',
+				placeholder: 'KWT-SMS',
+				description:
+					'Sender ID for the message. Must be pre-approved on your kwtSMS account. Leave empty to use the default from credentials.',
+			},
+			{
+				displayName: 'Test Mode',
+				name: 'testMode',
+				type: 'boolean',
+				default: true,
+				description:
+					'Whether to send in test mode. Messages are queued but not delivered. Credits are held until you delete them from the Sending Queue. Disable for production sends.',
+			},
+		],
 	},
 ];

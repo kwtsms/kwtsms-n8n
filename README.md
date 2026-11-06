@@ -63,8 +63,11 @@ You need a kwtSMS API account:
 **Parameters:**
 - **To**: Phone number(s), comma-separated. International format, digits only (e.g., `965XXXXXXXX`).
 - **Message**: SMS text. English: 160 chars/page. Arabic: 70 chars/page. Max 7 pages.
-- **Sender ID**: Must be pre-approved on your kwtSMS account.
-- **Test Mode** (optional): Messages are queued but not delivered. Credits are held until you delete them from the Sending Queue.
+- **Options** (optional, under *Add Option*):
+  - **Sender ID**: Must be pre-approved on your kwtSMS account. Empty uses the default from the credentials.
+  - **Test Mode**: On by default. Messages are queued but not delivered. Credits are held until you delete them from the Sending Queue. Turn it off for real sends.
+
+Workflows created before 0.3.0 keep the old fields (node version 1) and behave exactly as before.
 
 ### Account
 

@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-11-06
+
+### Changed
+
+- SMS > Send: Sender ID and Test Mode moved into an Options collection (node version 2), so the form shows only what is needed. Defaults are unchanged: test mode stays on and the sender comes from the credentials until you add the option. Existing workflows keep node version 1 and their settings (n8n review).
+
 ## [0.2.2] - 2026-11-06
 
 ### Changed

@@ -57,7 +57,9 @@ export class KwtSms implements INodeType {
 		name: 'kwtSms',
 		icon: 'file:kwtsms.svg',
 		group: ['output'],
-		version: 1,
+		// 2026-11-06 15:04 +03: version 2 moves Sender ID and Test Mode into Options; existing workflows stay on 1 (task #980).
+		version: [1, 2],
+		defaultVersion: 2,
 		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
 		description: 'Send SMS, check balance, validate numbers via kwtSMS gateway',
 		defaults: {
@@ -128,8 +130,21 @@ export class KwtSms implements INodeType {
 				if (resource === 'sms' && operation === 'send') {
 					const rawTo = this.getNodeParameter('to', i) as string;
 					const rawMessage = this.getNodeParameter('message', i) as string;
-					let senderId = this.getNodeParameter('senderId', i) as string;
-					const testMode = this.getNodeParameter('testMode', i, true) as boolean;
+					// 2026-11-06 15:04 +03: version 2 reads the Options collection; an option not added keeps the old default
+					// (test mode ON, sender from credentials). Version 1 reads the old top-level fields (task #980).
+					let senderId: string;
+					let testMode: boolean;
+					if (this.getNode().typeVersion >= 2) {
+						const options = this.getNodeParameter('options', i, {}) as {
+							senderId?: string;
+							testMode?: boolean;
+						};
+						senderId = options.senderId ?? '';
+						testMode = options.testMode ?? true;
+					} else {
+						senderId = this.getNodeParameter('senderId', i) as string;
+						testMode = this.getNodeParameter('testMode', i, true) as boolean;
+					}
 
 					// Fall back to default sender ID from credentials if not specified
 					if (!senderId) {

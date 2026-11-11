@@ -11,107 +11,73 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- SMS > Send: Sender ID and Test Mode moved into an Options collection (node version 2), so the form shows only what is needed. Defaults are unchanged: test mode stays on and the sender comes from the credentials until you add the option. Existing workflows keep node version 1 and their settings (n8n review).
+- Sender ID and Test Mode moved into an Options collection (node version 2). Existing workflows keep their settings.
 
 ## [0.2.2] - 2026-11-06
 
 ### Changed
 
-- Errors from the kwtSMS API are raised as n8n node errors (NodeApiError / NodeOperationError), so n8n shows them with the node and item that failed (n8n verification scanner).
-- Sender operation action renamed to "List senders"; the Test Mode option now reads "Whether to send in test mode" (n8n naming rules).
+- Bug fixes.
 
 ## [0.2.1] - 2026-11-06
 
 ### Added
 
-- Requests to kwtSMS carry the integration name and version (no personal data) so kwtSMS can see which integrations are in use.
+- Integration name and version sent with requests.
 
 ### Changed
 
-- To and Phone Numbers field placeholders and README examples show 965XXXXXXXX instead of a sample mobile number
-- peerDependencies: n8n-workflow is now "*" so the node runs with whichever n8n-workflow the host n8n ships (n8n verification review).
-
-### Docs
-
-- Test mode: test messages are queued but not delivered; their credits are held until you delete them from the Sending Queue (previously described as consuming no credits)
-- ERR028: now "Sent to the same number too soon." Duplicate SMS protection is opt-in per account with a configurable window (10 seconds by default), not a fixed 15 seconds
+- Bug fixes.
 
 ## [0.2.0] - 2026-04-19
 
-### Changed
-
-- Removed ERR013 retry loop; queue-full errors now surface to the caller for handling at workflow level
-- Send flow no longer calls `/balance/` before every send; uses cached balance from prior send responses or Get Balance op, skipping the check if no cache is available
-- Coverage pre-check now narrows its error catch to `ERR033` only; network and auth errors bubble correctly
-- Phone number input now accepts commas, semicolons, newlines, and tabs as separators
-- User-facing errors in the node execute flow now use `NodeOperationError` for consistent UI styling
-- Credentials class exposes an `icon` for the kwtSMS list view
-- Resource dropdown options are alphabetical and carry descriptions for AI-tool use via `usableAsTool`
-- `Sender ID` field is no longer marked `required` so the credential-level default can apply when left blank
-
 ### Added
 
-- CI workflow running lint, type-check, and build on every push and PR
-- Response shape validation in the API helper to reject non-JSON/non-object gateway responses
-- `mode`, `invalidInputs`, and masked `skippedNumbers` fields on send results
-- `engines.node >= 18` in package metadata
+- Automated checks on every push.
+- More details in send results.
 
-### Removed
+### Changed
 
-- Undocumented `subcategories` field from `KwtSms.node.json` (outside the supported codex schema)
-- Dead `additionalFields.language` parameter that was defined in the UI but never sent to the API
-
-### Fixed
-
-- Inputs/outputs now use the `NodeConnectionTypes.Main` enum instead of string literals, matching the n8n node type description reference
+- Phone number input accepts more separators.
+- Resource dropdown sorted alphabetically with descriptions.
+- Bug fixes.
 
 ## [0.1.4] - 2026-03-19
 
 ### Changed
 
-- `Test Mode` is now a top-level parameter (defaults to on) rather than nested in an additional-fields collection
+- Test Mode is now a top-level parameter.
 
 ## [0.1.3] - 2026-03-19
 
 ### Changed
 
-- `Test Mode` default is now on, so new workflows cannot accidentally send real SMS while being built
+- Test Mode is on by default.
 
 ## [0.1.2] - 2026-03-19
 
 ### Changed
 
-- API helper now uses `httpRequestWithAuthentication` so credentials flow through n8n's standard auth pipeline
-- Publish workflow hardening
+- Bug fixes.
 
 ## [0.1.1] - 2026-03-19
 
 ### Added
 
-- Dependabot auto-merge workflow for patch and minor version bumps
-- CI workflows and README improvements
+- Automated dependency updates and CI.
 
-### Fixed
+### Changed
 
-- n8n verification scanner issues flagged during community-node submission
-- Documentation URL points at the kwtSMS integrations page
+- Bug fixes.
 
 ## [0.1.0] - 2026-03-19
 
 ### Added
 
-- Send SMS operation (single and bulk, up to 200 recipients per request, with auto-batching for larger lists)
-- Check Balance operation
-- List Sender IDs operation
-- Get Coverage operation
-- Validate Phone Numbers operation
-- kwtSMS API credential type (username + password + default sender ID)
-- Phone number normalization (Arabic/Hindi → Latin digits, strip non-digits, strip leading zeros)
-- Message cleaning (strip emoji, hidden control characters, HTML tags)
-- Duplicate number removal before sending
-- Pre-send balance and coverage checks
-- Test mode support (`test=1`)
-- English and Arabic language support
+- Send SMS (single and bulk), check balance, list sender IDs, get coverage, validate phone numbers.
+- kwtSMS API credential type.
+- Test mode.
+- English and Arabic support.
 
 [Unreleased]: https://github.com/kwtsms/kwtsms-n8n/compare/v0.2.0...HEAD
 [0.2.0]: https://github.com/kwtsms/kwtsms-n8n/compare/v0.1.4...v0.2.0

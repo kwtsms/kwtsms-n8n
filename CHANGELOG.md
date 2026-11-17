@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- SMS Get Status and Get Delivery Report operations: look up a sent message by its message ID.
+
 ## [0.3.0] - 2026-11-06
 
 ### Changed

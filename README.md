@@ -19,6 +19,7 @@ free API testing and credits that do not expire.
 ## Features
 
 - **Send SMS**: one or many recipients; more than 200 numbers are split into batches of 200, sent with a short delay between them.
+- **Message status and delivery report**: look up a sent message by its message ID; delivery reports cover international numbers only.
 - **Account**: check balance, list the active country prefixes (coverage).
 - **Sender IDs**: list the approved Sender IDs on your account.
 - **Validate numbers**: check format and routing before you send.
@@ -70,6 +71,8 @@ kwtSMS account.
 | Resource | Operation | What it does |
 |----------|-----------|--------------|
 | SMS | Send | Sends a message to one or more recipients. |
+| SMS | Get Status | Returns the queue status of a sent message (by message ID). |
+| SMS | Get Delivery Report | Returns the delivery report of a sent message. International numbers only; Kuwait numbers have no delivery report. |
 | Account | Get Balance | Returns available and purchased credits. |
 | Account | Get Coverage | Returns the active country prefixes. |
 | Sender | List | Returns the Sender IDs on your account. |

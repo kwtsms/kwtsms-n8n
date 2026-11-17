@@ -232,7 +232,7 @@ export class KwtSms implements INodeType {
 						);
 					}
 
-					// Batch sending (no ERR013 retry — a single failure surfaces to the caller).
+					// Batch sending (no ERR013 retry: a single failure surfaces to the caller).
 					const batches: string[][] = [];
 					for (let j = 0; j < numbersToSend.length; j += MAX_NUMBERS_PER_BATCH) {
 						batches.push(numbersToSend.slice(j, j + MAX_NUMBERS_PER_BATCH));
@@ -306,6 +306,22 @@ export class KwtSms implements INodeType {
 				}
 
 				// ----- Account: Get Coverage -----
+				// 2026-11-18 00:03 +03: SMS Get Status (/status/) and Get Delivery Report (/dlr/), Boss voice 1219, workqueue 82
+				else if (resource === 'sms' && (operation === 'getStatus' || operation === 'getDeliveryReport')) {
+					const msgid = (this.getNodeParameter('messageId', i) as string).trim();
+					if (!/^[A-Za-z0-9]+$/.test(msgid)) {
+						throw new NodeOperationError(this.getNode(), 'Message ID must be the msg-id returned by Send.', {
+							itemIndex: i,
+						});
+					}
+					const endpoint = operation === 'getStatus' ? '/status/' : '/dlr/';
+					const response = await kwtSmsApiRequest.call(this, 'POST', endpoint, { msgid });
+					returnData.push({
+						json: response,
+						pairedItem: { item: i },
+					});
+				}
+
 				else if (resource === 'account' && operation === 'getCoverage') {
 					const response = await kwtSmsApiRequest.call(this, 'POST', '/coverage/');
 					returnData.push({

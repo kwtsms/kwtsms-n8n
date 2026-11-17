@@ -27,12 +27,41 @@ export const smsOperations: INodeProperties[] = [
 				description: 'Send an SMS to one or more recipients',
 				action: 'Send an SMS',
 			},
+			// 2026-11-18 00:02 +03: Status and Delivery Report operations (API /status/ and /dlr/), Boss voice 1219, workqueue 82
+			{
+				name: 'Get Status',
+				value: 'getStatus',
+				description: 'Get the queue status of a sent message by its message ID',
+				action: 'Get message status',
+			},
+			{
+				name: 'Get Delivery Report',
+				value: 'getDeliveryReport',
+				description: 'Get the delivery report of a sent message (international numbers only)',
+				action: 'Get delivery report',
+			},
 		],
 		default: 'send',
 	},
 ];
 
 export const smsFields: INodeProperties[] = [
+	// 2026-11-18 00:02 +03: message ID input for Get Status and Get Delivery Report, workqueue 82
+	{
+		displayName: 'Message ID',
+		name: 'messageId',
+		type: 'string',
+		required: true,
+		default: '',
+		placeholder: 'f4c841adee210f31307633ceaebff2ec',
+		description: 'The msg-id returned by the Send operation',
+		displayOptions: {
+			show: {
+				resource: ['sms'],
+				operation: ['getStatus', 'getDeliveryReport'],
+			},
+		},
+	},
 	{
 		displayName: 'To',
 		name: 'to',

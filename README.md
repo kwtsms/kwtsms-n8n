@@ -18,13 +18,13 @@ free API testing and credits that do not expire.
 
 ## Features
 
-- **Send SMS**: one or many recipients; 200 or more numbers are split into batches with delays and retries.
+- **Send SMS**: one or many recipients; more than 200 numbers are split into batches of 200, sent with a short delay between them.
 - **Account**: check balance, list the active country prefixes (coverage).
 - **Sender IDs**: list the approved Sender IDs on your account.
 - **Validate numbers**: check format and routing before you send.
 - **Phone normalization**: strips `+` and `00`, converts Arabic digits, removes duplicates.
 - **Message cleaning**: removes emoji, hidden characters and HTML tags before sending.
-- **Pre-send checks**: balance and coverage are checked before the send request.
+- **Pre-send checks**: numbers outside your active coverage are skipped; a send stops early when the last known balance is zero.
 - **Test mode**: on by default. Messages are queued on kwtSMS and not delivered.
 - **Error messages**: all kwtSMS error codes are mapped to plain text.
 
@@ -93,7 +93,7 @@ Numbers are normalized before every call: `+965XXXXXXXX`, `00965XXXXXXXX` and `+
 | ERR003 | Authentication failed. Check the API username and password. |
 | ERR006 | No valid phone numbers provided. |
 | ERR010 | Account balance is zero. |
-| ERR013 | Send queue is full. The node retries with backoff. |
+| ERR013 | Send queue is full. Wait a moment and run the step again. |
 | ERR028 | Same number too soon. Duplicate protection is opt-in per account; when on, the whole request is rejected and nothing is charged. |
 
 ## Arabic

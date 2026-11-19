@@ -13,6 +13,8 @@
 Send SMS, check your balance, validate numbers and list Sender IDs from your n8n workflows, through kwtSMS, the Kuwaiti
 SMS gateway. Free, and a verified community node: available on n8n Cloud since 2026-11-13.
 
+All kwtSMS integrations: [kwtsms.com/integrations](https://www.kwtsms.com/integrations/)
+
 kwtSMS delivers to Zain, Ooredoo, stc and Virgin in Kuwait and to more than 200 countries, with your own Sender ID,
 free API testing and credits that do not expire.
 

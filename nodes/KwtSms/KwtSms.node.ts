@@ -55,7 +55,8 @@ export class KwtSms implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'kwtSMS',
 		name: 'kwtSms',
-		icon: 'file:kwtsms.svg',
+		// 2026-11-27 16:09 +03: light + dark icon variants, n8n review of 0.4.0 (icon-prefer-themed-variants), task #1811.
+		icon: { light: 'file:kwtsms.svg', dark: 'file:kwtsms.dark.svg' },
 		group: ['output'],
 		// 2026-11-06 15:04 +03: version 2 moves Sender ID and Test Mode into Options; existing workflows stay on 1 (task #980).
 		version: [1, 2],

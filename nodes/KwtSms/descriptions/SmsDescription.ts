@@ -54,7 +54,8 @@ export const smsFields: INodeProperties[] = [
 		required: true,
 		default: '',
 		placeholder: 'f4c841adee210f31307633ceaebff2ec',
-		description: 'The msg-id returned by the Send operation',
+		// 2026-11-27 16:09 +03: 'ID' casing, n8n review of 0.4.0 (node-param-description-miscased-id), task #1811.
+		description: 'The message ID returned by the Send operation',
 		displayOptions: {
 			show: {
 				resource: ['sms'],
